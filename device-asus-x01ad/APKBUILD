@@ -1,0 +1,40 @@
+# Reference: <https://postmarketos.org/devicepkg>
+pkgname=device-asus-x01ad
+pkgdesc="Asus Zenfone Max M2"
+pkgver=0.1
+pkgrel=0
+url="https://postmarketos.org"
+license="MIT"
+arch="aarch64"
+options="!check !archcheck"
+depends="
+	linux-asus-x01ad
+	mesa-dri-gallium
+	msm-fb-refresher
+	mkbootimg
+	postmarketos-base
+"
+makedepends="devicepkg-dev"
+subpackages="$pkgname-nonfree-firmware:nonfree_firmware"
+source="
+	deviceinfo
+
+"
+
+build() {
+	devicepkg_build $startdir $pkgname
+}
+
+package() {
+	devicepkg_package $startdir $pkgname
+}
+
+nonfree_firmware() {
+	pkgdesc="Wi-Fi, ADSP Firmware"
+	depends="firmware-asus-x01ad"
+	mkdir "$subpkgdir"
+}
+
+sha512sums="
+39acd00a716d43b29fc55f14b963584017788fde9fe6aad7afaa3590077f6631ac55530c5e7bcd9b24d4fd8966a074ff9ca534415c378e48d7dc9e0b22ead464  deviceinfo
+"
